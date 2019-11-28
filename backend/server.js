@@ -2,8 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
-import exerciseRoute from './routes/exercises.route';
-import userRoute from './routes/users.route';
+import v1Router from './routes';
 
 config();
 
@@ -12,8 +11,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-//app.use('/exercises',exerciseRoute);
-//app.use('/users',userRoute);
+app.use(express.urlencoded({ extended: true }));
 
 // Default Route
 app.get('/', (req, res) =>
@@ -22,6 +20,8 @@ app.get('/', (req, res) =>
     message: 'Welcome to the MEAN STACK App'
   })
 );
+app.use('/api/v1',v1Router);
+
 
 const url = process.env.ATLAS_URL;
 mongoose.connect(url, {useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology: true});

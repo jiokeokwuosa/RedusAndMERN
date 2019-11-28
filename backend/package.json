@@ -1,23 +1,23 @@
 {
-  "name": "propertyprolite",
+  "name": "meanstack",
   "version": "1.0.0",
-  "description": "Property Pro Lite is a platform where people can create and/or search properties for sale or rent.",
+  "description": "Mean Stack",
   "main": "server.js",
   "scripts": {
-    "test": "nyc --reporter=text mocha ./API/src/**/*.test.js --timeout 30000 -r @babel/register --exit",
+    "test": "",
     "start": "node ./API/dist/app.js",
     "dev": "nodemon --exec babel-node ./server.js",
-    "build": "babel ./API/src -d ./API/dist --copy-files"    
+    "build": "babel ./API/src -d ./API/dist --copy-files"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jiokeokwuosa/PropertyPro-lite.git"
+    "url": "https://github.com/jiokeokwuosa/Mean"
   },
   "keywords": [
-    "property",
-    "sale",
-    "rent",
-    "bedroom"
+    "REACT",
+    "MONGODB",
+    "EXPRESS",
+    "NODE"
   ],
   "author": "chijioke okwuosa",
   "license": "ISC",
