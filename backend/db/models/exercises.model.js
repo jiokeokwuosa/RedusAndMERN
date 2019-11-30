@@ -9,6 +9,6 @@ const exerciseSchema = new Schema({
     }, {timestamps:true}
 );
 
-const exercise= mongoose.model('User', exerciseSchema);
+const exercise= mongoose.model('Exercise', exerciseSchema);
 
 export default exercise;

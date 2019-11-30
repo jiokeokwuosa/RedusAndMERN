@@ -24,7 +24,7 @@ app.use('/api/v1',v1Router);
 
 
 const url = process.env.ATLAS_URL;
-mongoose.connect(url, {useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology: true});
+mongoose.connect(url, {useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify: false});
 const connection = mongoose.connection;
 connection.once('open', ()=>{
     console.log('MongoDB database connected successfully');

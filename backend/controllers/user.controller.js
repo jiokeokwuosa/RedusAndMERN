@@ -3,9 +3,14 @@ class UserController {
     /* eslint camelcase: 0 */
     static async getAllUsers(req, res) {     
       try {
-        return res.status(200).json({
-            status: 'success',
-            data: 'Getting all users'
+        await User.find((err, createdUser) => {
+          if (err) console.log(err);               
+          
+          return res.status(200).json({
+              status: 'success',
+              data: createdUser
+          });
+            
         });
       } catch (err) {
         return res.status(500).json({
@@ -14,9 +19,9 @@ class UserController {
         });
       }
     }  
-    static async createUser(req, res) {   
-        const {username} =req.body;  
+    static async createUser(req, res) {         
         try {
+             const {username} =req.body; 
              await User.create({username:username}, (err, createdUser) => {
                 if (err) console.log(err);               
                 
