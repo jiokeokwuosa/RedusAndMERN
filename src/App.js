@@ -1,19 +1,16 @@
-import React, { Component } from "react";
-import "./assets/css/style.css";
-import Homepage from "./components/pages/Homepage";
+import React from "react";
+import NavBar from "./components/includes/Navbar.component";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import  "./assets/css/App.css";
 
-class App extends Component {
-	render() {
-		return (
-			<div>
-				<NavBar
-					Homepage={Homepage}				
-				/>
-			</div>
-		);
-	}
+const App = ()=>{
+	return (
+		<div className="container">
+			<NavBar/>
+		</div>
+	);
+	
 }
 
 export default App;
