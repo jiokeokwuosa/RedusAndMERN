@@ -1,2 +1,2 @@
 # Mean
-Mean Stack App
+Mean Stack App With Redus

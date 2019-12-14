@@ -1,46 +1,23 @@
-import React, {Component} from "react";
-import axios from "axios";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { fetchExercises, deleteExercise } from '../../redux/actions/exerciseActions';
 import Exercise from "../includes/Exercise";
 
 
 class ExerciseList extends Component{
 	constructor(props){
-		super(props);
-		this.state = {
-			exercises:[]			
-		}
+		super(props);		
 		this.handleDelete=this.handleDelete.bind(this);			
 	}
-	async componentDidMount(){
-		try {
-			const result = await axios.get('http://localhost:5000/api/v1/exercises');
-			// my endpoint repsonse has its own data property. axios equally has its own data property
-			if(result.data.data.length >0){
-				const allExercises = result.data.data;				
-				this.setState({
-					exercises:allExercises					
-				})					
-			}
-		} catch (error) {
-			console.error(error);
-		}	
-		
+	componentDidMount(){
+		this.props.fetchExercises();		
 	}
-	async handleDelete(id){		
-		try {
-			const result = await axios.delete('http://localhost:5000/api/v1/exercises/'+id);
-			console.log(result.status);
-			//after deleting from the database, equally delete it from what the user is seeing
-			this.setState({
-				exercises:this.state.exercises.filter(el=> el._id !== id)
-			})			
-		} catch (error) {
-			console.error(error);
-		}	
-		
+	handleDelete(id){		
+		this.props.deleteExercise(id)		
 	}
 	exerciseList(){
-		return this.state.exercises.map(currentExercise => {
+		return this.props.exercises.map(currentExercise => {
 			return <Exercise exercise={currentExercise} deleteExercise={this.handleDelete} key={currentExercise._id}/>
 		})
 	}	
@@ -70,5 +47,17 @@ class ExerciseList extends Component{
 		);
 	}
 }
-
-export default ExerciseList;
+ExerciseList.propTypes= {
+	fetchExercises:PropTypes.func.isRequired,
+	exercises:PropTypes.array.isRequired,
+	deleteExercise:PropTypes.func.isRequired
+}
+//note: the first 'exercises' is the name of the prop with which i will work in this component
+//'state.exercise' exercise here is the name of the reducer responsible for that data, note, it
+//is the name i used in the combine reducer function, while the last 'exercises' is the name of the
+//variable in my reducer to which i passed the payload, this should be the same name with the variable in 
+// my initial state
+const mapStateToProps = state => ({
+	exercises: state.exercise.exercises	
+})
+export default connect(mapStateToProps,{fetchExercises, deleteExercise})(ExerciseList);
